@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import LottieView from "lottie-react-native";
 import {
   View,
   Text,
@@ -68,8 +69,12 @@ export default function WelcomeScreen({ navigation }) {
           alignItems: "center",
         }}
       >
-        <Image
-          source={require("../assets/Exams-bro.png")}
+        <LottieView
+          source={{
+            uri: "https://lottie.host/c85c3f32-6924-448b-9389-bd4559e1a82d/yodNX18FGA.json",
+          }}
+          autoPlay
+          loop
           style={styles.illustration}
         />
       </Animated.View>
