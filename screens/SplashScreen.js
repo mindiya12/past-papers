@@ -41,7 +41,7 @@ export default function SplashScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#92E3A9", // Green background
+    backgroundColor: "#52D276", // Green background
     justifyContent: "center",
     alignItems: "center",
   },
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   loadingBarContainer: {
     width: "80%",
     height: 10,
-    backgroundColor: "#A9A9A9", // Black background for the loading bar
+    backgroundColor: "#FFFFFF", // Black background for the loading bar
     borderRadius: 5,
     marginTop: 50,
   },
