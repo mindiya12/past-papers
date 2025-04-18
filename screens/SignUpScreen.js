@@ -9,6 +9,7 @@ import {
   ScrollView,
   Platform,
   Image,
+  Alert,
 } from "react-native";
 
 export default function SignUpScreen({ navigation }) {
@@ -17,16 +18,26 @@ export default function SignUpScreen({ navigation }) {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignUp = () => {
+    // Basic validation
+    if (!email || !password || !confirmPassword) {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
+    if (password !== confirmPassword) {
+      Alert.alert("Error", "Passwords do not match");
+      return;
+    }
+
     // Placeholder for sign-up logic (e.g., Firebase authentication)
-    // For now, navigate to Home screen on button press
-    navigation.navigate("Home");
+    // For now, navigate to SignIn screen with the email
+    navigation.navigate("SignIn", { email });
   };
 
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust behavior for iOS and Android
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20} // Fine-tune offset for Android
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {/* Placeholder for the illustration */}
@@ -95,7 +106,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5", // Solid white background
+    backgroundColor: "#f5f5f5",
   },
   scrollContainer: {
     flexGrow: 1,
@@ -131,7 +142,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    backgroundColor: "#E6F0FA", // Light green background for input fields
+    backgroundColor: "#E6F0FA",
     borderRadius: 25,
     padding: 15,
     marginBottom: 15,
@@ -139,7 +150,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   signUpButton: {
-    backgroundColor: "#FFD700", // Yellow color for Sign Up
+    backgroundColor: "#FFD700",
     paddingVertical: 15,
     width: "80%",
     borderRadius: 25,
@@ -162,7 +173,7 @@ const styles = StyleSheet.create({
   },
   logInText: {
     fontSize: 14,
-    color: "#FFD700", // Yellow for the link
+    color: "#FFD700",
     fontWeight: "bold",
   },
 });

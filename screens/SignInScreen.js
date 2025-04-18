@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,23 +9,35 @@ import {
   ScrollView,
   Platform,
   Image,
+  Alert,
 } from "react-native";
 
-export default function SignInScreen({ navigation }) {
+export default function SignInScreen({ navigation, route }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Pre-fill email if passed from SignUpScreen
+  useEffect(() => {
+    if (route.params?.email) {
+      setEmail(route.params.email);
+    }
+  }, [route.params?.email]);
+
   const handleSignIn = () => {
-    // Placeholder for sign-in logic (e.g., Firebase authentication)
-    // For now, navigate to Home screen on button press
-    navigation.navigate("Home");
+    // Placeholder for authentication logic
+    if (email && password) {
+      // Simulate successful sign-in
+      navigation.navigate("Home");
+    } else {
+      Alert.alert("Error", "Please enter both email and password");
+    }
   };
 
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust behavior for iOS and Android
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20} // Fine-tune offset for Android
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {/* Placeholder for the illustration */}
@@ -85,7 +97,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5", // Solid white background
+    backgroundColor: "#f5f5f5",
   },
   scrollContainer: {
     flexGrow: 1,
@@ -121,7 +133,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    backgroundColor: "#E6F0FA", // Light green background for input fields
+    backgroundColor: "#E6F0FA",
     borderRadius: 25,
     padding: 15,
     marginBottom: 15,
@@ -129,7 +141,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   signInButton: {
-    backgroundColor: "#FFD700", // Yellow color for Sign In
+    backgroundColor: "#FFD700",
     paddingVertical: 15,
     width: "80%",
     borderRadius: 25,
@@ -152,7 +164,7 @@ const styles = StyleSheet.create({
   },
   createAccountText: {
     fontSize: 14,
-    color: "#FFD700", // Yellow for the link
+    color: "#FFD700",
     fontWeight: "bold",
   },
 });
