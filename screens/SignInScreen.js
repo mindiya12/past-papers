@@ -24,9 +24,7 @@ export default function SignInScreen({ navigation, route }) {
   }, [route.params?.email]);
 
   const handleSignIn = () => {
-    // Placeholder for authentication logic
     if (email && password) {
-      // Simulate successful sign-in
       navigation.navigate("Home");
     } else {
       Alert.alert("Error", "Please enter both email and password");
@@ -69,6 +67,12 @@ export default function SignInScreen({ navigation, route }) {
             secureTextEntry
             autoCapitalize="none"
           />
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ResetPassword")}
+            style={styles.forgotPassword}
+          >
+            <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Sign In Button */}
@@ -105,19 +109,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingVertical: 40,
   },
-  imagePlaceholder: {
-    width: 200,
-    height: 200,
-    backgroundColor: "#e0e0e0",
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 30,
-  },
-  placeholderText: {
-    color: "#666",
-    fontSize: 16,
-  },
   title: {
     fontSize: 28,
     fontWeight: "bold",
@@ -139,6 +130,15 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 16,
     color: "#333",
+  },
+  forgotPassword: {
+    alignSelf: "flex-end",
+    marginBottom: 15,
+  },
+  forgotPasswordText: {
+    fontSize: 14,
+    color: "#000",
+    fontWeight: "bold",
   },
   signInButton: {
     backgroundColor: "#FFD700",
