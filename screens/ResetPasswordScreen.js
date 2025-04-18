@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   sendButton: {
-    backgroundColor: "#3DBD61", // Green to match the image
+    backgroundColor: "#FFC107", // Yellow to match the image
     paddingVertical: 15,
     width: "80%",
     borderRadius: 25,
@@ -119,6 +119,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#FFFFFF",
+    color: "#000",
   },
 });

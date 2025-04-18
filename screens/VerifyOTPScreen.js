@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   verifyButton: {
-    backgroundColor: "#92E3A9",
+    backgroundColor: "#FFC107",
     paddingVertical: 15,
     width: "80%",
     borderRadius: 25,
@@ -186,6 +186,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#333",
+    color: "#000",
   },
 });
