@@ -14,6 +14,10 @@ import SettingsScreen from "./screens/SettingsScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import DownloadsScreen from "./screens/DownloadsScreen";
 import SemesterSelection from "./screens/SemesterSelectionScreen";
+import ResetPasswordScreen from "./screens/ResetPasswordScreen";
+import VerifyOTPScreen from "./screens/VerifyOTPScreen";
+import CreateNewPasswordScreen from "./screens/CreateNewPasswordScreen";
+import PasswordUpdatedScreen from "./screens/PasswordUpdatedScreen";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -34,6 +38,26 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen
+          name="ResetPassword"
+          component={ResetPasswordScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="VerifyOTP"
+          component={VerifyOTPScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="CreateNewPassword"
+          component={CreateNewPasswordScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="PasswordUpdated"
+          component={PasswordUpdatedScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
