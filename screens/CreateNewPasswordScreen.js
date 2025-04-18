@@ -124,16 +124,16 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   createButton: {
-    backgroundColor: "#92E3A9",
+    backgroundColor: "#FFC107",
     paddingVertical: 15,
     width: "80%",
-    borderRadius: 25,
+    borderRadius: 10,
     alignItems: "center",
     marginTop: 20,
   },
   buttonText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#333",
+    color: "#000",
   },
 });
