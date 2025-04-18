@@ -13,13 +13,14 @@ import {
 } from "react-native";
 
 export default function SignUpScreen({ navigation }) {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignUp = () => {
     // Basic validation
-    if (!email || !password || !confirmPassword) {
+    if (!username || !email || !password || !confirmPassword) {
       Alert.alert("Error", "Please fill in all fields");
       return;
     }
@@ -52,6 +53,14 @@ export default function SignUpScreen({ navigation }) {
 
         {/* Input Fields */}
         <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            placeholderTextColor="#999"
+            value={username}
+            onChangeText={setUsername}
+            autoCapitalize="none"
+          />
           <TextInput
             style={styles.input}
             placeholder="Email"
@@ -142,7 +151,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    backgroundColor: "#E6F0FA",
+    backgroundColor: "#91E7A9",
     borderRadius: 25,
     padding: 15,
     marginBottom: 15,

@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFC107", // Yellow to match the image
     paddingVertical: 15,
     width: "80%",
-    borderRadius: 25,
+    borderRadius: 10,
     alignItems: "center",
     marginTop: 20,
   },
