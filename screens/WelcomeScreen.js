@@ -133,8 +133,8 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
   },
   illustration: {
-    width: 250,
-    height: 250,
+    width: 300,
+    height: 300,
     resizeMode: "contain",
   },
   textContainer: {

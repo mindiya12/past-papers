@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as Animatable from "react-native-animatable";
 import {
   View,
   Text,
@@ -33,20 +34,32 @@ export default function ResetPasswordScreen({ navigation }) {
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {/*Heading*/}
-        <Text style={styles.title}>RESET PASSWORD</Text>
-        <Image
+        <Animatable.Text animation="fadeInUp" delay={200} style={styles.title}>
+          RESET PASSWORD
+        </Animatable.Text>
+        <Animatable.Image
+          animation="fadeInDown"
+          delay={300}
           source={require("../assets/ResetPasswordEmail.png")} // Illustration
           style={styles.illustration}
         />
 
         {/*Subheading */}
 
-        <Text style={styles.subtitle}>
+        <Animatable.Text
+          animation="fadeInLeft"
+          delay={500}
+          style={styles.subtitle}
+        >
           Please enter your email address to receive a verification code
-        </Text>
+        </Animatable.Text>
 
         {/* Input Field */}
-        <View style={styles.inputContainer}>
+        <Animatable.View
+          animation="fadeIn"
+          delay={700}
+          style={styles.inputContainer}
+        >
           <TextInput
             style={styles.input}
             placeholder="Enter Your Email"
@@ -56,18 +69,29 @@ export default function ResetPasswordScreen({ navigation }) {
             autoCapitalize="none"
             keyboardType="email-address"
           />
-        </View>
+        </Animatable.View>
 
         {/* Send Button */}
-        <TouchableOpacity style={styles.sendButton} onPress={handleSendOTP}>
-          <Text style={styles.buttonText}>SEND</Text>
-        </TouchableOpacity>
+        <Animatable.View
+          animation="fadeInUp"
+          delay={500}
+          style={styles.buttonWrapper}
+        >
+          <TouchableOpacity style={styles.sendButton} onPress={handleSendOTP}>
+            <Text style={styles.buttonText}>SEND</Text>
+          </TouchableOpacity>
+        </Animatable.View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  buttonWrapper: {
+    width: "100%",
+    alignItems: "center",
+    marginTop: 20,
+  },
   illustration: {
     width: 300,
     height: 300,

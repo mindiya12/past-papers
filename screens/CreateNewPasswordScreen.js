@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as Animatable from "react-native-animatable";
 import {
   View,
   Text,
@@ -37,19 +38,35 @@ export default function CreateNewPasswordScreen({ navigation }) {
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {/* Placeholder for the illustration */}
-        <Image
+        <Animatable.Image
+          animation="fadeInDown"
+          delay={200}
           source={require("../assets/Login-amico.png")} // Replace with appropriate asset
           style={styles.illustration}
         />
 
         {/* Heading and Subheading */}
-        <Text style={styles.title}>CREATE NEW PASSWORD</Text>
-        <Text style={styles.subtitle}>
+        <Animatable.Text
+          animation="fadeInLeft"
+          delay={300}
+          style={styles.title}
+        >
+          CREATE NEW PASSWORD
+        </Animatable.Text>
+        <Animatable.Text
+          animation="fadeInRight"
+          delay={300}
+          style={styles.subtitle}
+        >
           Your new password must be different from previously used passwords
-        </Text>
+        </Animatable.Text>
 
         {/* Input Fields */}
-        <View style={styles.inputContainer}>
+        <Animatable.View
+          animation="fadeIn"
+          delay={500}
+          style={styles.inputContainer}
+        >
           <TextInput
             style={styles.input}
             placeholder="Enter Your Password"
@@ -68,21 +85,32 @@ export default function CreateNewPasswordScreen({ navigation }) {
             secureTextEntry
             autoCapitalize="none"
           />
-        </View>
+        </Animatable.View>
 
         {/* Create Button */}
-        <TouchableOpacity
-          style={styles.createButton}
-          onPress={handleCreatePassword}
+        <Animatable.View
+          animation="fadeInUp"
+          delay={600}
+          style={styles.buttonWrapper}
         >
-          <Text style={styles.buttonText}>CREATE</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.createButton}
+            onPress={handleCreatePassword}
+          >
+            <Text style={styles.buttonText}>CREATE</Text>
+          </TouchableOpacity>
+        </Animatable.View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  buttonWrapper: {
+    width: "100%",
+    alignItems: "center",
+    marginTop: "20",
+  },
   illustration: {
     width: 300,
     height: 300,

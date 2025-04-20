@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as Animatable from "react-native-animatable";
 import {
   View,
   Text,
@@ -42,17 +43,32 @@ export default function SignUpScreen({ navigation }) {
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {/* Placeholder for the illustration */}
-        <Image
+        <Animatable.Image
+          animation="fadeInDown"
+          duration={1000}
+          delay={100}
           source={require("../assets/Mathematics-bro.png")}
           style={styles.illustration}
         />
 
         {/* Heading and Subheading */}
-        <Text style={styles.title}>LET’S GET STARTED</Text>
-        <Text style={styles.subtitle}>sign up</Text>
+        <Animatable.Text animation="fadeInUp" delay={300} style={styles.title}>
+          LET’S GET STARTED
+        </Animatable.Text>
+        <Animatable.Text
+          animation="fadeInUp"
+          delay={500}
+          style={styles.subtitle}
+        >
+          sign up
+        </Animatable.Text>
 
         {/* Input Fields */}
-        <View style={styles.inputContainer}>
+        <Animatable.View
+          animation="fadeInUp"
+          delay={700}
+          style={styles.inputContainer}
+        >
           <TextInput
             style={styles.input}
             placeholder="Username"
@@ -87,26 +103,45 @@ export default function SignUpScreen({ navigation }) {
             secureTextEntry
             autoCapitalize="none"
           />
-        </View>
+        </Animatable.View>
 
         {/* Sign Up Button */}
-        <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
-          <Text style={styles.buttonText}>SIGN UP</Text>
-        </TouchableOpacity>
+        <Animatable.View
+          animation="zoomIn"
+          delay={900}
+          style={styles.buttonWrapper}
+        >
+          <TouchableOpacity
+            style={styles.signUpButton}
+            onPress={handleSignUp}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.buttonText}>SIGN UP</Text>
+          </TouchableOpacity>
+        </Animatable.View>
 
         {/* Log In Link */}
-        <View style={styles.footer}>
+        <Animatable.View
+          animation="fadeInUp"
+          delay={1100}
+          style={styles.footer}
+        >
           <Text style={styles.footerText}>Already have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
             <Text style={styles.logInText}>Log in</Text>
           </TouchableOpacity>
-        </View>
+        </Animatable.View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  buttonWrapper: {
+    width: "100%",
+    alignItems: "center",
+    marginTop: 15,
+  },
   illustration: {
     width: 200,
     height: 200,

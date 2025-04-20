@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import * as Animatable from "react-native-animatable";
 import {
   View,
   Text,
@@ -39,17 +40,31 @@ export default function SignInScreen({ navigation, route }) {
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {/* Placeholder for the illustration */}
-        <Image
+        <Animatable.Image
+          animation="fadeInDown"
+          delay={200}
           source={require("../assets/lover-bro.png")}
           style={styles.illustration}
         />
 
         {/* Heading and Subheading */}
-        <Text style={styles.title}>WELCOME BACK</Text>
-        <Text style={styles.subtitle}>sign in</Text>
+        <Animatable.Text animation="fadeInUp" delay={300} style={styles.title}>
+          WELCOME BACK
+        </Animatable.Text>
+        <Animatable.Text
+          animation="fadeInUp"
+          delay={400}
+          style={styles.subtitle}
+        >
+          sign in
+        </Animatable.Text>
 
         {/* Input Fields */}
-        <View style={styles.inputContainer}>
+        <Animatable.View
+          animation="fadeIn"
+          delay={500}
+          style={styles.inputContainer}
+        >
           <TextInput
             style={styles.input}
             placeholder="Email or Username"
@@ -73,26 +88,37 @@ export default function SignInScreen({ navigation, route }) {
           >
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
           </TouchableOpacity>
-        </View>
+        </Animatable.View>
 
         {/* Sign In Button */}
-        <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
-          <Text style={styles.buttonText}>SIGN IN</Text>
-        </TouchableOpacity>
+        <Animatable.View
+          animation="zoomIn"
+          delay={700}
+          style={styles.buttonWrapper}
+        >
+          <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
+            <Text style={styles.buttonText}>SIGN IN</Text>
+          </TouchableOpacity>
+        </Animatable.View>
 
         {/* Create Account Link */}
-        <View style={styles.footer}>
+        <Animatable.View animation="fadeInUp" delay={800} style={styles.footer}>
           <Text style={styles.footerText}>Don’t have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
             <Text style={styles.createAccountText}>Create one now</Text>
           </TouchableOpacity>
-        </View>
+        </Animatable.View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  buttonWrapper: {
+    width: "100%",
+    alignItems: "center",
+    marginTop: 20,
+  },
   illustration: {
     width: 200,
     height: 200,
@@ -124,7 +150,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    backgroundColor: "#E6F0FA",
+    backgroundColor: "#91E7A9",
     borderRadius: 25,
     padding: 15,
     marginBottom: 15,

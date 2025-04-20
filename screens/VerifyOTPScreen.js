@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import * as Animatable from "react-native-animatable";
+
 import {
   View,
   Text,
@@ -66,16 +68,28 @@ export default function VerifyOTPScreen({ navigation, route }) {
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {/* Placeholder for the illustration */}
-        <Image
+        <Animatable.Image
+          animation="fadeInDown"
+          delay={200}
           source={require("../assets/OTPverify.png")} // Illustration
           style={styles.illustration}
         />
 
         {/* Heading and Subheading */}
-        <Text style={styles.title}>ENTER YOUR VERIFICATION CODE</Text>
+        <Animatable.Text
+          animation="fadeInLeft"
+          delay={300}
+          style={styles.title}
+        >
+          ENTER YOUR VERIFICATION CODE
+        </Animatable.Text>
 
         {/* OTP Input Fields */}
-        <View style={styles.otpContainer}>
+        <Animatable.View
+          animation="fadeIn"
+          delay={400}
+          style={styles.otpContainer}
+        >
           {otpDigits.map((digit, index) => (
             <TextInput
               key={index}
@@ -90,33 +104,55 @@ export default function VerifyOTPScreen({ navigation, route }) {
               autoCapitalize="none"
             />
           ))}
-        </View>
+        </Animatable.View>
 
-        <Text style={styles.subtitle}>
+        <Animatable.Text
+          animation="fadeInRight"
+          delay={400}
+          style={styles.subtitle}
+        >
           We sent a four digit verification code to your email{" "}
           <Text style={styles.highlightedEmail}>{email}</Text>. You can check
           your inbox.
-        </Text>
+        </Animatable.Text>
 
         <TouchableOpacity
           onPress={handleResendOTP}
           style={styles.resendContainer}
         >
-          <Text style={styles.resendText}>
+          <Animatable.Text
+            animation="fadeIn"
+            delay={500}
+            style={styles.resendText}
+          >
             I didn’t receive the code? Send Again
-          </Text>
+          </Animatable.Text>
         </TouchableOpacity>
 
         {/* Verify Button */}
-        <TouchableOpacity style={styles.verifyButton} onPress={handleVerifyOTP}>
-          <Text style={styles.buttonText}>VERIFY</Text>
-        </TouchableOpacity>
+        <Animatable.View
+          animation="fadeInUp"
+          delay={500}
+          style={styles.buttonWrapper}
+        >
+          <TouchableOpacity
+            style={styles.verifyButton}
+            onPress={handleVerifyOTP}
+          >
+            <Text style={styles.buttonText}>VERIFY</Text>
+          </TouchableOpacity>
+        </Animatable.View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  buttonWrapper: {
+    width: "100%",
+    alignItems: "center",
+    marginTop: 20,
+  },
   illustration: {
     width: 300,
     height: 300,
