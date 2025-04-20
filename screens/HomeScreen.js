@@ -1,4 +1,5 @@
 import React from "react";
+import * as Animatable from "react-native-animatable";
 import {
   View,
   Text,
@@ -41,22 +42,30 @@ export default function HomeScreen({ navigation }) {
       <Text style={styles.headerText}>Select Your Faculty</Text>
       {/* Faculty Cards */}
       <ScrollView contentContainerStyle={styles.content}>
-        {faculties.map((faculty) => (
-          <TouchableOpacity
+        {faculties.map((faculty, index) => (
+          <Animatable.View
             key={faculty.id}
-            style={styles.card}
-            onPress={() =>
-              navigation.navigate("FacultyDegrees", { faculty: faculty.name })
-            }
+            animation="fadeInUp"
+            delay={index * 150}
+            duration={500}
+            useNativeDriver
           >
-            <Text style={styles.cardText}>{faculty.name}</Text>
-            <Ionicons
-              name={faculty.icon}
-              size={50}
-              color="#FCDC01"
-              style={styles.cardIcon}
-            />
-          </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.card}
+              onPress={() =>
+                navigation.navigate("FacultyDegrees", { faculty: faculty.name })
+              }
+            >
+              <Text style={styles.cardText}>{faculty.name}</Text>
+              <Ionicons
+                name={faculty.icon}
+                size={50}
+                color="#FCDC01"
+                style={styles.cardIcon}
+              />
+            </TouchableOpacity>
+          </Animatable.View>
         ))}
       </ScrollView>
 
