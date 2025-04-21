@@ -1,5 +1,4 @@
-import React from "react";
-import * as Animatable from "react-native-animatable";
+import React, { useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,6 +8,7 @@ import {
   SafeAreaView,
   StatusBar,
   Image,
+  Animated,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -20,9 +20,64 @@ const faculties = [
 ];
 
 export default function HomeScreen({ navigation }) {
+  // Animation values for each faculty card
+  const fadeAnim = useRef(faculties.map(() => new Animated.Value(0))).current;
+  const scaleAnim = useRef(
+    faculties.map(() => new Animated.Value(0.9))
+  ).current;
+  const headerAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    // Animate header text
+    Animated.timing(headerAnim, {
+      toValue: 1,
+      duration: 800,
+      useNativeDriver: true,
+    }).start();
+
+    // Staggered animation for faculty cards
+    faculties.forEach((_, index) => {
+      Animated.sequence([
+        Animated.delay(index * 300),
+        Animated.parallel([
+          Animated.timing(fadeAnim[index], {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true,
+          }),
+          Animated.spring(scaleAnim[index], {
+            toValue: 1,
+            friction: 6,
+            tension: 40,
+            useNativeDriver: true,
+          }),
+        ]),
+      ]).start();
+    });
+  }, []);
+
+  const handleCardPress = (faculty, index) => {
+    // Create a bounce effect when card is pressed
+    Animated.sequence([
+      Animated.timing(scaleAnim[index], {
+        toValue: 0.95,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+      Animated.spring(scaleAnim[index], {
+        toValue: 1,
+        friction: 3,
+        tension: 40,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      navigation.navigate("FacultyDegrees", { faculty: faculty.name });
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      {/* App Bar */}
+      {/* App Bar - No animations */}
       <SafeAreaView style={styles.headerContainer}>
         <StatusBar backgroundColor="#FFD700" barStyle="dark-content" />
         <View style={styles.appBar}>
@@ -39,37 +94,59 @@ export default function HomeScreen({ navigation }) {
           </View>
         </View>
       </SafeAreaView>
-      <Text style={styles.headerText}>Select Your Faculty</Text>
-      {/* Faculty Cards */}
+
+      {/* Animated Header Text */}
+      <Animated.Text
+        style={[
+          styles.headerText,
+          {
+            opacity: headerAnim,
+            transform: [
+              {
+                translateY: headerAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [20, 0],
+                }),
+              },
+            ],
+          },
+        ]}
+      >
+        Select Your Faculty
+      </Animated.Text>
+
+      {/* Faculty Cards with animations */}
       <ScrollView contentContainerStyle={styles.content}>
         {faculties.map((faculty, index) => (
-          <Animatable.View
+          <Animated.View
             key={faculty.id}
-            animation="fadeInUp"
-            delay={index * 150}
-            duration={500}
-            useNativeDriver
+            style={[
+              {
+                opacity: fadeAnim[index],
+                transform: [{ scale: scaleAnim[index] }],
+              },
+            ]}
           >
             <TouchableOpacity
-              activeOpacity={0.7}
               style={styles.card}
-              onPress={() =>
-                navigation.navigate("FacultyDegrees", { faculty: faculty.name })
-              }
+              onPress={() => handleCardPress(faculty, index)}
+              activeOpacity={0.9}
             >
               <Text style={styles.cardText}>{faculty.name}</Text>
-              <Ionicons
-                name={faculty.icon}
-                size={50}
-                color="#FCDC01"
-                style={styles.cardIcon}
-              />
+              <Animated.View>
+                <Ionicons
+                  name={faculty.icon}
+                  size={50}
+                  color="#FCDC01"
+                  style={styles.cardIcon}
+                />
+              </Animated.View>
             </TouchableOpacity>
-          </Animatable.View>
+          </Animated.View>
         ))}
       </ScrollView>
 
-      {/* Bottom Navigation */}
+      {/* Bottom Navigation - No animations */}
       <View style={styles.bottomNav}>
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Ionicons name="home-outline" size={30} color="#000" />
