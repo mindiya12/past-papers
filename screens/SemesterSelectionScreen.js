@@ -9,6 +9,7 @@ import {
   StatusBar,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import * as Animatable from "react-native-animatable";
 
 const semesters = [
   { id: "1", name: "Y1S1" },
@@ -23,15 +24,20 @@ export default function SemesterSelectionScreen({ route, navigation }) {
   const { university, degree } = route.params;
 
   const renderSemester = ({ item }) => (
-    <TouchableOpacity
-      style={styles.semesterCard}
-      onPress={() => {
-        // Placeholder for navigating to past papers screen
-        alert(`Selected ${item.name} for ${degree} at ${university}`);
-      }}
-    >
-      <Text style={styles.semesterText}>{item.name}</Text>
-    </TouchableOpacity>
+    <Animatable.View animation="fadeInUp" duration={600}>
+      <TouchableOpacity
+        style={styles.semesterCard}
+        onPress={() => {
+          navigation.navigate("PastPapers", {
+            university,
+            degree,
+            semester: item.name,
+          });
+        }}
+      >
+        <Text style={styles.semesterText}>{item.name}</Text>
+      </TouchableOpacity>
+    </Animatable.View>
   );
 
   return (
@@ -40,15 +46,25 @@ export default function SemesterSelectionScreen({ route, navigation }) {
       <SafeAreaView style={styles.headerContainer}>
         <StatusBar backgroundColor="#FFD700" barStyle="dark-content" />
         <View style={styles.appBar}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons name="arrow-back" size={24} color="#000" />
-          </TouchableOpacity>
-          <View style={styles.headerTextContainer}>
-            <Text style={styles.headerText}>{degree}</Text>
+          <View>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Ionicons name="arrow-back" size={24} color="#000" />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-            <Ionicons name="person" size={24} color="#000" />
-          </TouchableOpacity>
+          <View style={styles.headerTextContainer}>
+            <Animatable.Text
+              animation="fadeIn"
+              duration={800}
+              style={styles.headerText}
+            >
+              {degree}
+            </Animatable.Text>
+          </View>
+          <View>
+            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+              <Ionicons name="person" size={24} color="#000" />
+            </TouchableOpacity>
+          </View>
         </View>
       </SafeAreaView>
 
@@ -64,18 +80,34 @@ export default function SemesterSelectionScreen({ route, navigation }) {
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-          <Ionicons name="home-outline" size={30} color="#000" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Search")}>
-          <Ionicons name="search-outline" size={30} color="#000" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Downloads")}>
-          <Ionicons name="download-outline" size={30} color="#000" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
-          <Ionicons name="settings-outline" size={30} color="#000" />
-        </TouchableOpacity>
+        <Animatable.View animation="bounce" duration={600}>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Animatable.View animation="pulse" duration={300}>
+              <Ionicons name="home-outline" size={30} color="#000" />
+            </Animatable.View>
+          </TouchableOpacity>
+        </Animatable.View>
+        <Animatable.View animation="bounce" duration={600}>
+          <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+            <Animatable.View animation="pulse" duration={300}>
+              <Ionicons name="search-outline" size={30} color="#000" />
+            </Animatable.View>
+          </TouchableOpacity>
+        </Animatable.View>
+        <Animatable.View animation="bounce" duration={600}>
+          <TouchableOpacity onPress={() => navigation.navigate("Downloads")}>
+            <Animatable.View animation="pulse" duration={300}>
+              <Ionicons name="download-outline" size={30} color="#000" />
+            </Animatable.View>
+          </TouchableOpacity>
+        </Animatable.View>
+        <Animatable.View animation="bounce" duration={600}>
+          <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+            <Animatable.View animation="pulse" duration={300}>
+              <Ionicons name="settings-outline" size={30} color="#000" />
+            </Animatable.View>
+          </TouchableOpacity>
+        </Animatable.View>
       </View>
     </SafeAreaView>
   );

@@ -18,6 +18,7 @@ import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 import VerifyOTPScreen from "./screens/VerifyOTPScreen";
 import CreateNewPasswordScreen from "./screens/CreateNewPasswordScreen";
 import PasswordUpdatedScreen from "./screens/PasswordUpdatedScreen";
+import PastPapersScreen from "./screens/PastPapersScreen";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -38,6 +39,11 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
         <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen
+          name="PastPapers"
+          component={PastPapersScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="ResetPassword"
           component={ResetPasswordScreen}
